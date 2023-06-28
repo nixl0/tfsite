@@ -1,0 +1,80 @@
+::placeholder {
+    color: var(--hiback);
+}
+
+header {
+    display: flex;
+}
+
+header div {
+    flex-grow: 1;
+    padding: 20px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header div:nth-of-type(2) {
+    flex-grow: 4;
+}
+
+.search__form {
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 6px;
+}
+
+.search__input {
+    width: 400px;
+    height: 125%;
+    border: none;
+    border-radius: 100px;
+    padding-inline: 20px;
+    font: 1em "Segoe UI", sans-serif;
+}
+
+.search__submit {
+    height: 30px;
+    background-color: var(--hiback);
+    color: var(--hifront);
+    border: none;
+    border-radius: 100px;
+    font: 1em "Segoe UI", sans-serif;
+    padding-inline: 20px;
+}
+
+.search__submit:hover {
+    background-color: var(--hiback_highlight);
+    cursor: pointer;
+}
+
+.controls__container {
+    display: flex;
+    column-gap: 6px;
+}
+
+.controls__control {
+    height: 30px;
+    background-color: var(--focus);
+    color: var(--hifront);
+    border: none;
+    border-radius: 100px;
+    padding-inline: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.controls__control:hover {
+    background-color: var(--focus_highlight);
+}
+
+.logo {
+    scale: 70%;
+}
+
+.logo:hover {
+    filter: contrast(1.25) brightness(0.75);
+    cursor: pointer;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'core/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'core/main.css' %}">
+    <link rel="stylesheet" href="{% static 'core/header.css' %}">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="/upload/" method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+
+        <label for="btn_upload">
+            Загрузить изображение
+        </label>
+        <input id="btn_upload" name="image" type="file" value="Загрузить">
+        <br/>
+
+        <input type="submit" value="Подтвердить">
+    </form>
+
+</body>
+</html>

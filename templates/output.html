@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% if results %}
+        
+        {% for result in results %}
+            
+            <div style="background-color: #EEE; padding: 10px;">
+                <h3>
+                    {{ result.label }}
+                </h3>
+                <span>
+                    {{ result.probability }}
+                </span>
+            </div>
+            <br/>
+
+        {% endfor %}
+            
+    {% endif %}
+        
+</body>
+</html>

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+{% block title %}
+    Home
+{% endblock title %}
+
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'core/catalog.css' %}">
+{% endblock links %}
+    
+
+
+{% block body %}
+
+    <div class="catalog">
+    
+        
+        {% for post in posts %}
+
+        <div class="post__container">
+            <div class="post__wrapper">
+                <img class="image"
+                    src="{{ post.image }}"
+                    alt="">
+                <div class="stats">
+                    <div class="stats__tags">
+                        
+                        {% for tag in post.tags %}
+                            <p>{{ tag }}</p>
+                        {% endfor %}
+                            
+                    </div>
+        
+                    <div class="stats__likescomments">
+                        <p>likes</p>
+                        <p>comments</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        {% endfor %}
+            
+
+        <div class="post__container">
+            <div class="post__wrapper">
+                <img class="image"
+                    src="https://hips.hearstapps.com/hmg-prod/images/small-fuffy-dog-breeds-1623362663.jpg?crop=1.00xw:0.753xh;0,0.0719xh&resize=1200:*"
+                    alt="">
+                <div class="stats">
+                    <div class="stats__tags">
+                        <p>abc</p>
+                        <p>abc</p>
+                        <p>abc</p>
+                    </div>
+    
+                    <div class="stats__likescomments">
+                        <p>abc</p>
+                        <p>abc</p>
+                        <p>abc</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post__container">
+            <div class="post__wrapper">
+                <img class="image"
+                    src="https://hips.hearstapps.com/hmg-prod/images/small-fuffy-dog-breeds-1623362663.jpg?crop=1.00xw:0.753xh;0,0.0719xh&resize=1200:*"
+                    alt="">
+            </div>
+        </div>
+        <div class="post__container">
+            <div class="post__wrapper">
+                <img class="image"
+                    src="https://hips.hearstapps.com/hmg-prod/images/small-fuffy-dog-breeds-1623362663.jpg?crop=1.00xw:0.753xh;0,0.0719xh&resize=1200:*"
+                    alt="">
+            </div>
+        </div>
+        <div class="post__container">
+            <div class="post__wrapper">
+                <img class="image"
+                    src="https://hips.hearstapps.com/hmg-prod/images/small-fuffy-dog-breeds-1623362663.jpg?crop=1.00xw:0.753xh;0,0.0719xh&resize=1200:*"
+                    alt="">
+            </div>
+        </div>
+        <div class="post__container">
+            <div class="post__wrapper">
+                <img class="image"
+                    src="https://hips.hearstapps.com/hmg-prod/images/small-fuffy-dog-breeds-1623362663.jpg?crop=1.00xw:0.753xh;0,0.0719xh&resize=1200:*"
+                    alt="">
+            </div>
+        </div>
+        <div class="post__container">
+            <div class="post__wrapper">
+                <img class="image"
+                    src="https://hips.hearstapps.com/hmg-prod/images/small-fuffy-dog-breeds-1623362663.jpg?crop=1.00xw:0.753xh;0,0.0719xh&resize=1200:*"
+                    alt="">
+            </div>
+        </div>
+        <div class="post__container">
+            <div class="post__wrapper">
+                <img class="image"
+                    src="https://hips.hearstapps.com/hmg-prod/images/small-fuffy-dog-breeds-1623362663.jpg?crop=1.00xw:0.753xh;0,0.0719xh&resize=1200:*"
+                    alt="">
+            </div>
+        </div>
+        <div class="post__container">
+            <div class="post__wrapper">
+                <img class="image"
+                    src="https://hips.hearstapps.com/hmg-prod/images/small-fuffy-dog-breeds-1623362663.jpg?crop=1.00xw:0.753xh;0,0.0719xh&resize=1200:*"
+                    alt="">
+            </div>
+        </div>
+    
+    </div>
+    
+{% endblock body %}
+    
+    

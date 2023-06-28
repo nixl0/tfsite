@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'core/register.css' %}">
+{% endblock links %}
+
+
+{% block title %}
+Авторизация
+{% endblock title %}
+
+
+{% block body %}
+
+<div class="wrapper">
+
+    <form method="post" class="register_form">
+        {% csrf_token %}
+
+        <p>Имя пользователя</p>
+        <input type="text" name="username" id="username">
+
+        <p>Пароль</p>
+        <input type="password" name="password" id="password">
+
+        <br />
+
+        <input class="submit" type="submit" value="Авторизоваться">
+
+
+    </form>
+
+</div>
+
+{% endblock body %}

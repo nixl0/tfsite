@@ -1,0 +1,20 @@
+:root {
+    --hifront: #F0E7CE;
+    --redder: hsl(0, 53%, 87%);
+    --lofront: #B4AD9B;
+    --hiback: #69655B;
+    --loback: #171614;
+    --focus: #C84630;
+    --ok: #7EC632;
+    --focus_highlight: #e05a42;
+    --hiback_highlight: #928c7e;
+}
+
+body {
+    background-color: var(--hifront);
+}
+
+p {
+    font: 1em "Segoe UI", sans-serif;
+}
+

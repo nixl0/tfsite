@@ -1,0 +1,172 @@
+.wrapper {
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+}
+
+.row {
+    display: flex;
+}
+
+.image_section {
+    /* background-color: blue; */
+    width: 100%;
+}
+
+.meta_section {
+    /* background-color: orange; */
+    width: 40%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.meta_stats {
+    /* background-color: brown; */
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.meta_info {
+    /* background-color: green; */
+    height: 100%;
+}
+
+.image {
+    width: 100%;
+}
+
+.stats_unit {
+    background-color: var(--focus);
+    color: var(--hifront);
+    border: none;
+    border-radius: 100px;
+    padding-inline: 20px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    cursor: pointer;
+}
+
+.stats_unit_darkened {
+    background-color: var(--lofront);
+    color: var(--hifront);
+    border: none;
+    border-radius: 100px;
+    padding-inline: 20px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    cursor: pointer;
+}
+
+.stats_unit:hover {
+    background-color: var(--focus_highlight);
+}
+
+.unit__number {
+    color: var(--hifront);
+}
+
+.meta_info {
+    display: flex;
+    flex-direction: column;
+}
+
+.meta_info__title {
+    font: 1em "Segoe UI", sans-serif;
+    font-size: 0.8em;
+    color: var(--lofront);
+    padding-bottom: 10px;
+}
+
+.meta_info__content {
+    font: 1em "Segoe UI", sans-serif;
+    font-size: 0.8em;
+    color: var(--loback);
+    padding-bottom: 20px;
+}
+
+.comments_row {
+    display: flex;
+    flex-direction: column;
+    padding-block: 40px;
+    /* background-color: aqua; */
+    justify-content: center;
+}
+
+.comment {
+    width: 400px;
+    padding: 20px;
+    border-radius: 20px;
+    margin-block: 5px;
+}
+
+.comment__head {
+    /* background-color: yellow; */
+}
+
+.head__author {
+    font: bold 1em "Segoe UI", sans-serif;
+    color: var(--focus);
+}
+
+.head__author:hover {
+    color: var(--focus_highlight);
+}
+
+
+.head__timestamp {
+    font: 0.8em "Segoe UI", sans-serif;
+    color: var(--lofront);
+}
+
+.comment__body {
+    font: 0.8em "Segoe UI", sans-serif;
+    color: var(--loback);
+}
+
+.user_comment {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.user_comment textarea {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    font: 0.8em "Segoe UI", sans-serif;
+    color: var(--loback);
+}
+
+.submit {
+    height: 30px;
+    width: 30%;
+    background-color: var(--focus);
+    color: var(--hifront);
+    border: none;
+    border-radius: 100px;
+    padding-inline: 20px;
+}
+
+.submit:hover {
+    background-color: var(--focus_highlight);
+    cursor: pointer;
+}
+
+.comment_authors {
+    width: 400px;
+    padding: 20px;
+    margin-block: 5px;
+    border-radius: 20px;
+    background-color: var(--redder);
+}

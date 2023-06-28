@@ -1,0 +1,67 @@
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__top {
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+}
+
+.form__bottom {
+    display: flex;
+    justify-content: center;
+    padding-block: 10px;
+}
+
+.form * {
+
+}
+
+.image_section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.image {
+    width: 600px;
+}
+
+.meta {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.meta textarea {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    font: 0.8em "Segoe UI", sans-serif;
+    color: var(--loback);
+}
+
+.meta p {
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 0.8em;
+    color: var(--lofront);
+}
+
+.submit {
+    height: 30px;
+    background-color: var(--focus);
+    color: var(--hifront);
+    border: none;
+    border-radius: 100px;
+    padding-inline: 20px;
+}
+
+.submit:hover {
+    background-color: var(--focus_highlight);
+    cursor: pointer;
+}

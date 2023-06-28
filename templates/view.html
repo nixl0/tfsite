@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'core/view.css' %}">
+{% endblock links %}
+
+
+{% block title %}
+View
+{% endblock title %}
+
+
+{% block body %}
+
+<div class="wrapper">
+
+    <div class="row">
+
+        <div class="image_section">
+            <img class="image"
+                src="{{ post.image.url }}"
+                alt="">
+        </div>
+
+        <div class="meta_section">
+            <div class="meta_stats">
+                
+                {% if is_liked %}
+                <a class="stats_unit_darkened">
+                {% else %}
+                <a class="stats_unit" href="like">
+                {% endif %}
+
+                    <!-- Лайки -->
+                    <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                    <svg width="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8 10V20M8 10L4 9.99998V20L8 20M8 10L13.1956 3.93847C13.6886 3.3633 14.4642 3.11604 15.1992 3.29977L15.2467 3.31166C16.5885 3.64711 17.1929 5.21057 16.4258 6.36135L14 9.99998H18.5604C19.8225 9.99998 20.7691 11.1546 20.5216 12.3922L19.3216 18.3922C19.1346 19.3271 18.3138 20 17.3604 20L8 20"
+                            stroke="var(--hifront)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <!-- Число лайков -->
+                    <p class="unit__number">
+                        {{ likes_count }}
+                    </p>
+
+                </a>
+                
+                <a class="stats_unit" href="#">
+                    
+                    <!-- Комментарии -->
+                    <?xml version="1.0" encoding="utf-8"?>
+                    <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                    <svg width="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_429_11233)">
+                            <path
+                                d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 13.4876 3.36093 14.891 4 16.1272L3 21L7.8728 20C9.10904 20.6391 10.5124 21 12 21Z"
+                                stroke="var(--hifront)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                    </svg>
+
+                    <!-- Количество комментариев -->
+                    <p class="unit__number">
+                        {{ comments_count }}
+                    </p>
+
+                </a>
+            </div>
+
+
+            <div class="meta_info">
+                
+                <div class="meta_info__tags">
+                    <h2 class="meta_info__title">
+                        Тэги
+                    </h2>
+                    <p class="meta_info__content">
+                        {{ post.tags }}
+                    </p>
+                </div>
+
+                <div class="meta_info__desc">
+                    <h2 class="meta_info__title">
+                        Описание
+                    </h2>
+                    <p class="meta_info__content">
+                        {{ post.desc }}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row comments_row">
+
+        <!-- Комментарии -->
+        <form method="post" action="comment/" class="user_comment">
+            {% csrf_token %}
+
+            <textarea name="body" id="body" cols="40" rows="5"></textarea>
+            <button type="submit" class="submit">Отправить</button>
+
+        </form>
+
+        
+        {% for comment in comments %}
+        
+        {% if comment.author.id == author_id %}
+        <div class="comment_authors">
+        {% else %}
+        <div class="comment">
+        {% endif %}
+
+            <h2 class="comment__head">
+                <a href="">
+                    <span class="head__author">
+                        {{ comment.author.username }}
+                    </span>
+                </a>
+                <span class="head__timestamp">
+                    {{ comment.timestamp }}
+                </span>
+            </h2>
+        
+            <p class="comment__body">
+                {{ comment.body }}
+            </p>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock body %}

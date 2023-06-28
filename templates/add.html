@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'core/add.css' %}">
+{% endblock links %}
+    
+
+{% block title %}
+    Add
+{% endblock title %}
+
+
+{% block body %}
+    
+    <div class="wrapper">
+
+        <form method="POST" class="form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form__top">
+                <div class="image_section">
+                    <input type="file" name="image" id="image">
+                
+                    <img class="image"
+                        src="https://hips.hearstapps.com/hmg-prod/images/small-fuffy-dog-breeds-1623362663.jpg?crop=1.00xw:0.753xh;0,0.0719xh&resize=1200:*"
+                        alt="">
+                </div>
+                
+                <div class="meta">
+                
+                    <p>Тэги</p>
+                    <textarea name="tags" id="tags" cols="40" rows="5"></textarea>
+                
+                    <p>Описание</p>
+                    <textarea name="desc" id="desc" cols="40" rows="20"></textarea>
+                
+                </div>
+            </div>
+
+            <div class="form__bottom">
+                <button type="submit" class="submit">Опубликовать</button>
+            </div>
+        
+        
+        </form>
+
+    </div>
+
+{% endblock body %}
+    

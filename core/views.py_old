@@ -1,0 +1,217 @@
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import redirect, render
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout, get_user
+from core.models import PersonalizedUser, Post
+from PIL import Image
+import tensorflow as tf
+
+def register_user(request):
+    if request.method == 'POST':
+        user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+        user.save()
+        
+        new_user = User.objects.get(username=user.username)
+        PersonalizedUser.objects.create(interests='', user_id=new_user.id)
+
+        return redirect('home')
+    else:
+        return render(request, 'register.html')
+
+
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+
+            return redirect('home')
+        else:
+            return HttpResponse('invalid login')
+    else:
+        return render(request, 'login.html')
+    
+
+def logout_user(request):
+    logout(request)
+
+    return redirect('home')
+
+
+def profile(request):
+    authenticated_user = get_user(request)
+    personalized_user = PersonalizedUser.objects.get(user_id=authenticated_user.id)
+    # Поскольку PersonalizedUser дублирует User, но содержит дополнительное поле interests, мы достаём и его
+
+    return render(request, 'profile.html', { 'authenticated_user': authenticated_user, 'personalized_user': personalized_user })
+
+
+def home(request):
+    posts = Post.objects.all()
+
+    return render(request, 'home.html', { 'posts': posts })
+
+
+def post_add(request):
+    if request.method == 'POST':
+        """
+        tags > formatted
+        desc > same
+        image > pasted
+        highlights > analyzed and gathered
+        author > id extracted
+        """
+
+        formatted_tags = request.POST['tags'].replace(' ', '')
+        
+        highlights = ''
+        data = analyze(request.FILES['image'])
+        for x, option in enumerate(data):
+            if x == 0:
+                highlights = highlights + option['label']
+            else:
+                highlights = highlights + ',' + option['label']
+
+        author = get_user(request)
+
+        post = Post(
+                tags=formatted_tags,
+                desc=request.POST['desc'],
+                image=request.FILES['image'],
+                highlights=highlights,
+                author=author
+            )
+        
+        post.save()
+
+        return redirect('home')
+    else:
+        return render(request, 'add.html')
+
+
+def post_view(request, id):
+    post = Post.objects.get(id=id)
+
+    remember(request, post.highlights)
+
+    return render(request, 'view.html', { 'post': post })
+
+
+def analyze(image):
+    # С помощью TensorFlow анализ десяти самых подходящих "хайлайтов"
+
+    img = Image.open(image)
+    img = img.resize((224, 224))
+    img_array = tf.keras.preprocessing.image.img_to_array(img)
+    img_array = tf.expand_dims(img_array, 0)
+
+    # Загрузка модели VGG16
+    model = tf.keras.applications.VGG16(include_top=True, weights='imagenet')
+
+    # Предсказание класса изображения
+    predictions = model.predict(img_array)
+    results = tf.keras.applications.vgg16.decode_predictions(predictions, top=10)
+
+    data = []
+    for result in results[0]:
+        label = result[1]
+        probability = round(float(result[2]), 3)
+        data.append({
+            'label': label,
+            'probability': probability
+        })
+
+    return data
+
+
+def remember(request, highlights):
+    # Во время просмотра поста, сохранение "хайлайтов" просматриваемого поста в "интересы" пользователя
+
+    authenticated_user = get_user(request)
+    personalized_user = PersonalizedUser.objects.get(user_id=authenticated_user.id)
+
+    # Парсинг
+    interests_str = personalized_user.interests
+    interests = list()
+
+    if interests_str == '':
+        # Если у пользователя нет интересов
+        highlights_arr = break_csv(highlights)
+        for highlight in highlights_arr:
+            interests.append({
+                'title': highlight,
+                'weight': '0'
+            })
+            
+        encoded_highlights = encode(highlights)
+        import pdb; pdb.set_trace()
+        
+        personalized_user.interests = encode(interests_str)
+        personalized_user.save()
+    else:
+        # TODO
+        pass
+        # interests_arr = interests_str.split(',')
+        # for interest in interests_str:
+        #     interests['title'], interests['weight'] = interest.split(':')
+
+    # print(interests)
+
+def break_csv(csv_str):
+    return csv_str.split(',')
+
+def build_csv(csv_arr):
+    return ''.join(csv_arr)
+
+def encode(interests):
+    interests_str = ''
+    
+    for x, interest in enumerate(interests):
+        if x == 0:
+            interests_str = interest['title'] + ':' + interest['weight']
+        else:
+            interests_str = ',' + interest['title'] + ':' + interest['weight']
+    
+    return interests_str
+
+def decode():
+    pass
+
+
+def offer():
+    # На домашней странице, первыми отображаются посты с темы "хайлайтами", которые больше всего соответствуют "интересам" пользователя
+
+    pass
+
+
+# def analyze(request):
+#     image = request.FILES['image']
+#     img = Image.open(image)
+#     img = img.resize((224, 224))
+#     img_array = tf.keras.preprocessing.image.img_to_array(img)
+#     img_array = tf.expand_dims(img_array, 0) # Create a batch
+
+#     # Load the model
+#     # model = tf.keras.applications.MobileNetV2(include_top=True, weights='imagenet')
+#     model = tf.keras.applications.VGG16(include_top=True, weights='imagenet')
+
+#     # Predict the class of the image
+#     predictions = model.predict(img_array)
+#     # results = tf.keras.applications.mobilenet_v2.decode_predictions(predictions, top=10)
+#     results = tf.keras.applications.vgg16.decode_predictions(predictions, top=10)
+
+#     response_data = []
+#     for result in results[0]:
+#         label = result[1]
+#         probability = round(float(result[2]), 3)
+#         response_data.append({
+#             'label': label,
+#             'probability': probability
+#         })
+
+#     return render(request, 'output.html', {
+#         'results': response_data
+#     })

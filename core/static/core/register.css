@@ -1,0 +1,28 @@
+.register_form {
+    width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.register_form input {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    font: 0.8em "Segoe UI", sans-serif;
+}
+
+.submit {
+    height: 30px;
+    background-color: var(--focus);
+    color: var(--hifront);
+    border: none;
+    border-radius: 100px;
+    padding-inline: 20px;
+}
+
+.submit:hover {
+    background-color: var(--focus_highlight);
+    cursor: pointer;
+}

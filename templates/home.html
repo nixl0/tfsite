@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+{% block title %}
+    Home
+{% endblock title %}
+
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'core/catalog.css' %}">
+{% endblock links %}
+    
+
+
+{% block body %}
+
+    <div class="catalog">
+    
+        
+        {% for post in posts %}
+
+        <div class="post__container">
+            
+
+            <a href="post/{{ post.id }}">
+                <div class="post__wrapper" style="background-image: url('{{ post.image.url }}');">
+
+                    <img class="image" src="{{ post.image.url }}" alt="">
+                    
+                    <div class="stats">
+                        <p class="stats__tags">
+                            {{ post.tags }}
+                        </p>
+                    
+                        <p class="stats__user">
+                            {{ post.author }}
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+            
+        {% endfor %}
+    
+    </div>
+    
+{% endblock body %}
+    
+    
